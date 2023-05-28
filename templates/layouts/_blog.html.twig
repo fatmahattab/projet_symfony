@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block body %}
+	<div class="container mx-auto">
+		<h1 class="text-5xl text-center mt-24 mb-8">
+			{{ title }}</h1>
+
+		<div class="grid grid-cols-4 gap-4 content-start">
+			<div class="col-span-3">
+				<div class="grid gap-4 md:grid-cols-3 sm:grid-cols-2">
+					{% for post in posts %}
+						{% include "components/_card.html.twig" with {post: post} only %}
+					{% endfor %}
+				</div>
+				<div class="navigation flex justify-center mb-8">
+					{{ knp_pagination_render(posts) }}
+				</div>
+			</div>
+			<div>
+				<div class="sticky top-24">
+					{% include "components/_search_data.html.twig" with {
+						form: form ?? null
+					} only %}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
